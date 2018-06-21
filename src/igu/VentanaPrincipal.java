@@ -1023,9 +1023,7 @@ public class VentanaPrincipal extends JFrame {
 			btnAtras.setMnemonic('T');
 			btnAtras.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					modeloTablaPaquete.getDataVector().clear();
-					modeloTablaAlojamiento.getDataVector().clear();
-					modeloTablaEntradas.getDataVector().clear();
+					borrarContenidoTablaRelacionPaquetesAlojamientosEntradas();
 
 					lbImagenAlojamiento.setIcon(null);
 					desHabilitarSpinner();
@@ -1037,6 +1035,16 @@ public class VentanaPrincipal extends JFrame {
 			btnAtras.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		}
 		return btnAtras;
+	}
+
+	/**
+	 * Borra el contenido de las tablas que contienen la relacion de paquetes
+	 * alojamientos y entradas asociadas a un parque de atracciones.
+	 */
+	private void borrarContenidoTablaRelacionPaquetesAlojamientosEntradas() {
+		modeloTablaPaquete.getDataVector().clear();
+		modeloTablaAlojamiento.getDataVector().clear();
+		modeloTablaEntradas.getDataVector().clear();
 	}
 
 	private JButton getBtnSiguiente() {
@@ -1874,9 +1882,12 @@ public class VentanaPrincipal extends JFrame {
 			btnAtras_1 = new JButton("Atras");
 			btnAtras_1.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					// ((CardLayout) contentPane.getLayout()).show(contentPane,
-					// "relacionPaquetesAlojamientos");
-					// btnGuardarReservsa.setEnabled(false);
+					((CardLayout) contentPane.getLayout()).show(contentPane, "relacionPaquetesAlojamientos");
+
+					textAreaReserva.setText("");
+					textAreaReserva.setEnabled(false);
+
+					btnGuardarReservsa.setEnabled(false);
 				}
 			});
 			btnAtras_1.setMnemonic('t');
@@ -1891,45 +1902,33 @@ public class VentanaPrincipal extends JFrame {
 			btnGuardarReservsa.setEnabled(false);
 			btnGuardarReservsa.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					// guardar la reserva
 					try {
 						agencia.guardarReserva();
 
 						JOptionPane.showMessageDialog(null, "Su reserva se ha realizado con exito", "INFORMACION",
 								JOptionPane.INFORMATION_MESSAGE);
 
-						// borrar todo el contenido de las tablas
-						modeloTablaPaquete.getDataVector().clear();
-						modeloTablaAlojamiento.getDataVector().clear();
-						modeloTablaEntradas.getDataVector().clear();
-						// modeloReserva.clear();
+						borrarContenidoTablaRelacionPaquetesAlojamientosEntradas();
 
-						paquetes.clear();
-						alojamientosReserva.clear();
-						entradas.clear();
+						borrarContenidoTablasReserva();
 
-						// Borrar el contenido de las observaciones y se
-						// deshabilita
-						textAreaObservaciones.setEnabled(false);
-						textAreaObservaciones.setText("");
-						lblObservaciones.setEnabled(false);
+						borrarContenidoTotalReserva();
 
-						// poner los botones deshabilitados
-						btnSiguiente.setEnabled(false);
-						btnAñadir.setEnabled(false);
+						borrarDeshabilitarObservaciones();
+
+						deshabilitarBotones();
 
 						desHabilitarSpinner();
 
-						txNombre.setText("");
-						txApellidos.setText("");
-						txDni.setText("");
-						textAreaReserva.setEnabled(false);
-						textAreaReserva.setText("");
+						borrarInformacionPnDatosClienteResumen();
 
-						// cambiar al panel anterior
+						lbImagenAlojamiento.setIcon(null);
+
+						deshabilitarTabbedPaneProductos();
+						
 						((CardLayout) contentPane.getLayout()).show(contentPane, "principal");
+
 					} catch (IOException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
@@ -1937,6 +1936,55 @@ public class VentanaPrincipal extends JFrame {
 			btnGuardarReservsa.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		}
 		return btnGuardarReservsa;
+	}
+
+	private void deshabilitarTabbedPaneProductos() {
+		tabbedPaneProductosAnadidos.setEnabledAt(0, false);
+		tabbedPaneProductosAnadidos.setEnabledAt(1, false);
+		tabbedPaneProductosAnadidos.setEnabledAt(2, false);
+		tabbedPaneProductosAnadidos.setSelectedIndex(-1);
+	}
+
+	private void borrarInformacionPnDatosClienteResumen() {
+		txNombre.setText("");
+		txApellidos.setText("");
+		txDni.setText("");
+		textAreaReserva.setEnabled(false);
+		textAreaReserva.setText("");
+	}
+
+	private void deshabilitarBotones() {
+		btnSiguiente.setEnabled(false);
+		btnAñadir.setEnabled(false);
+		btnEliminar.setEnabled(false);
+	}
+
+	/**
+	 * Metodo que borra el contenido de las observaciones y las deshabilita.
+	 */
+	private void borrarDeshabilitarObservaciones() {
+		textAreaObservaciones.setEnabled(false);
+		textAreaObservaciones.setText("");
+		lblObservaciones.setEnabled(false);
+	}
+
+	/**
+	 * Borra el contenido de los arrays que conforman la reserva.
+	 */
+	private void borrarContenidoTotalReserva() {
+		paquetes.clear();
+		alojamientosReserva.clear();
+		entradas.clear();
+	}
+
+	/**
+	 * Metodo que borra el contenido total de las tablas que muestran los productos
+	 * añadidos a la reserva.
+	 */
+	private void borrarContenidoTablasReserva() {
+		modeloTablaAlojamientoReserva.getDataVector().clear();
+		modeloTablaEntradasReserva.getDataVector().clear();
+		modeloTablaPaqueteReserva.getDataVector().clear();
 	}
 
 	private JPanel getPnListaResumenReserva() {
