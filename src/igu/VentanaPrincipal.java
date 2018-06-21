@@ -171,6 +171,7 @@ public class VentanaPrincipal extends JFrame {
 	private JPanel pnListaResumenReserva;
 	private JTextArea textAreaReserva;
 	private JScrollPane scrollPane_9;
+	private JButton btnCancelar_1;
 
 	/**
 	 * Launch the application.
@@ -1065,11 +1066,34 @@ public class VentanaPrincipal extends JFrame {
 	private JButton getBtnCancelar() {
 		if (btnCancelar == null) {
 			btnCancelar = new JButton("Cancelar");
-			btnCancelar.setMnemonic('L');
+			btnCancelar.setMnemonic('E');
 			btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 			btnCancelar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					borrarContenidoTablaRelacionPaquetesAlojamientosEntradas();
 
+					borrarContenidoTablasReserva();
+
+					borrarContenidoTotalReserva();
+
+					borrarDeshabilitarObservaciones();
+
+					deshabilitarBotones();
+
+					desHabilitarSpinner();
+
+					borrarInformacionPnDatosClienteResumen();
+
+					lbImagenAlojamiento.setIcon(null);
+
+					deshabilitarTabbedPaneProductos();
+
+					tbParquesTematicos.clearSelection();
+					btnSeleccionar.setEnabled(false);
+					textAreaDescripcionParque.setText("");
+					textAreaDescripcionParque.setEnabled(false);
+
+					((CardLayout) contentPane.getLayout()).show(contentPane, "principal");
 				}
 			});
 		}
@@ -1107,7 +1131,7 @@ public class VentanaPrincipal extends JFrame {
 	private JLabel getLblNAdultos() {
 		if (lblNAdultos == null) {
 			lblNAdultos = new JLabel("N\u00BA Adultos:");
-			lblNAdultos.setDisplayedMnemonic('D');
+			lblNAdultos.setDisplayedMnemonic('U');
 			lblNAdultos.setLabelFor(getSpinnerAdultos());
 			lblNAdultos.setEnabled(false);
 			lblNAdultos.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -1202,7 +1226,7 @@ public class VentanaPrincipal extends JFrame {
 	private JCheckBox getChckbxDesayunoIncluido() {
 		if (chckbxDesayunoIncluido == null) {
 			chckbxDesayunoIncluido = new JCheckBox("Desayuno Incluido");
-			chckbxDesayunoIncluido.setMnemonic('E');
+			chckbxDesayunoIncluido.setMnemonic('Y');
 			chckbxDesayunoIncluido.setEnabled(false);
 			chckbxDesayunoIncluido.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		}
@@ -1871,6 +1895,7 @@ public class VentanaPrincipal extends JFrame {
 			pnBotones1 = new JPanel();
 			FlowLayout flowLayout = (FlowLayout) pnBotones1.getLayout();
 			flowLayout.setAlignment(FlowLayout.RIGHT);
+			pnBotones1.add(getBtnCancelar_1());
 			pnBotones1.add(getBtnAtras_1());
 			pnBotones1.add(getBtnGuardarReservsa());
 		}
@@ -1899,6 +1924,7 @@ public class VentanaPrincipal extends JFrame {
 	private JButton getBtnGuardarReservsa() {
 		if (btnGuardarReservsa == null) {
 			btnGuardarReservsa = new JButton("Guardar Reserva");
+			btnGuardarReservsa.setMnemonic('U');
 			btnGuardarReservsa.setEnabled(false);
 			btnGuardarReservsa.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -1925,7 +1951,12 @@ public class VentanaPrincipal extends JFrame {
 						lbImagenAlojamiento.setIcon(null);
 
 						deshabilitarTabbedPaneProductos();
-						
+
+						tbParquesTematicos.clearSelection();
+						btnSeleccionar.setEnabled(false);
+						textAreaDescripcionParque.setText("");
+						textAreaDescripcionParque.setEnabled(false);
+
 						((CardLayout) contentPane.getLayout()).show(contentPane, "principal");
 
 					} catch (IOException e1) {
@@ -2012,5 +2043,42 @@ public class VentanaPrincipal extends JFrame {
 			textAreaReserva.setEditable(false);
 		}
 		return textAreaReserva;
+	}
+
+	private JButton getBtnCancelar_1() {
+		if (btnCancelar_1 == null) {
+			btnCancelar_1 = new JButton("Cancelar");
+			btnCancelar_1.setMnemonic('E');
+			btnCancelar_1.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					borrarContenidoTablaRelacionPaquetesAlojamientosEntradas();
+
+					borrarContenidoTablasReserva();
+
+					borrarContenidoTotalReserva();
+
+					borrarDeshabilitarObservaciones();
+
+					deshabilitarBotones();
+
+					desHabilitarSpinner();
+
+					borrarInformacionPnDatosClienteResumen();
+
+					lbImagenAlojamiento.setIcon(null);
+
+					deshabilitarTabbedPaneProductos();
+
+					tbParquesTematicos.clearSelection();
+					btnSeleccionar.setEnabled(false);
+					textAreaDescripcionParque.setText("");
+					textAreaDescripcionParque.setEnabled(false);
+
+					((CardLayout) contentPane.getLayout()).show(contentPane, "principal");
+				}
+			});
+			btnCancelar_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		}
+		return btnCancelar_1;
 	}
 }
