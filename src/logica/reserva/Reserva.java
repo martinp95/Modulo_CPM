@@ -87,10 +87,10 @@ public class Reserva {
 		resumen += "** PAQUETES TEMATICOS **\n";
 		for (PaqueteReserva paquete : paquetes) {
 			resumen += "Paquete: " + paquete.getCodigo() + "/ " + paquete.getDenominacion() + "/ "
-					+ paquete.getDenominacionParque() + "/ " + paquete.getDuracion() + " días\nFecha Inicio: "
+					+ paquete.getDenominacionParque() + "/ " + paquete.getDuracion() + " dÃ­as\nFecha Inicio: "
 					+ paquete.getFechaInicio().getDay() + "/" + (paquete.getFechaInicio().getMonth() + 1) + "/"
 					+ (paquete.getFechaInicio().getYear() + 1900) + "\nN. Adultos: " + paquete.getNumeroAdultos()
-					+ "/ N. Niños: " + paquete.getNumeroNinos() + "\n\n";
+					+ "/ N. NiÃ±os: " + paquete.getNumeroNinos() + "\n\n";
 			totalPaquetes += paquete.getPrecioTotal();
 			descuentoPaquetes += paquete.getDescuento();
 		}
@@ -108,7 +108,7 @@ public class Reserva {
 					+ alojamientoReserva.getDenominacionParque() + "\nFecha Inicio: "
 					+ alojamientoReserva.getFechaInicio().getDay() + "/"
 					+ (alojamientoReserva.getFechaInicio().getMonth() + 1) + "/"
-					+ (alojamientoReserva.getFechaInicio().getYear() + 1900) + " / Número noches: "
+					+ (alojamientoReserva.getFechaInicio().getYear() + 1900) + " / NÃºmero noches: "
 					+ alojamientoReserva.getNumeroNoches() + " / Desayuno: " + desayuno + "\nN. Personas:"
 					+ alojamientoReserva.getNumeroPersonas() + "\n\n";
 			totalAlojamientos = alojamientoReserva.getPrecioTotal();
@@ -119,17 +119,17 @@ public class Reserva {
 		for (EntradaReserva entrada : entradas) {
 			resumen += "Entrada: " + entrada.getCodigo() + " / " + entrada.getDenominacionParque() + "\nFecha Inicio: "
 					+ entrada.getFechaInicio().getDay() + "/" + (entrada.getFechaInicio().getMonth() + 1) + "/"
-					+ (entrada.getFechaInicio().getYear() + 1900) + " / Número de días: " + entrada.getNumeroDiaas()
-					+ "\nN. Adultos: " + entrada.getNumeroAdultos() + "/ N. Niños: " + entrada.getNumeroNinos()
+					+ (entrada.getFechaInicio().getYear() + 1900) + " / NÃºmero de dÃ­as: " + entrada.getNumeroDiaas()
+					+ "\nN. Adultos: " + entrada.getNumeroAdultos() + "/ N. NiÃ±os: " + entrada.getNumeroNinos()
 					+ "\n\n";
 			totalEntradas += entrada.getPrecioTotal();
 			descuentoEntradas += entrada.getDescuento();
 		}
 
-		resumen += "**** PAGADO RESERVA ****\nPaquetes temáticos:\t\t\t\t" + totalPaquetes + "€\nAlojamientos:\t\t\t\t"
-				+ totalAlojamientos + "€\nEntradas:\t\t\t\t" + totalEntradas + "€\nDescuentos Oferta:\t\t\t\t"
-				+ (descuentoAlojamientos + descuentoEntradas + descuentoPaquetes) + "€\n\nImporte Total:\t\t\t\t"
-				+ (totalPaquetes + totalAlojamientos + totalEntradas) + "€";
+		resumen += "**** PAGADO RESERVA ****\nPaquetes temÃ¡ticos:\t\t\t\t" + totalPaquetes + "â‚¬"
+				+ "\nAlojamientos:\t\t\t\t\t" + totalAlojamientos + "â‚¬" + "\nEntradas:\t\t\t\t\t" + totalEntradas + "â‚¬"
+				+ "\nDescuentos Oferta:\t\t\t\t" + (descuentoAlojamientos + descuentoEntradas + descuentoPaquetes) + "â‚¬"
+				+ "\n\nImporte Total:\t\t\t\t\t" + (totalPaquetes + totalAlojamientos + totalEntradas) + "â‚¬";
 
 		return resumen.toUpperCase();
 	}

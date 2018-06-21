@@ -3,5 +3,6 @@ encoding//files/alojamientos.dat=UTF-8
 encoding//files/entradas.dat=UTF-8
 encoding//files/paquetes.dat=UTF-8
 encoding//files/tematicos.dat=UTF-8
+encoding//src/logica/reserva/Reserva.java=UTF-8
 encoding/<project>=UTF-8
 separateDerivedEncodings=true

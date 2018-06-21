@@ -18,6 +18,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -47,6 +48,7 @@ import javax.swing.JSpinner;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
 import javax.swing.SpinnerDateModel;
@@ -63,6 +65,7 @@ import logica.Entrada;
 import logica.Paquete;
 import logica.ParqueTematico;
 import logica.reserva.AlojamientoReserva;
+import logica.reserva.Cliente;
 import logica.reserva.EntradaReserva;
 import logica.reserva.PaqueteReserva;
 
@@ -153,6 +156,21 @@ public class VentanaPrincipal extends JFrame {
 	private List<AlojamientoReserva> alojamientosReserva = new ArrayList<AlojamientoReserva>();
 	private List<PaqueteReserva> paquetes = new ArrayList<PaqueteReserva>();
 	private List<EntradaReserva> entradas = new ArrayList<EntradaReserva>();
+	private JPanel pnDatosClienteResumen;
+	private JPanel pnBotones1;
+	private JPanel pnDatosCliente;
+	private JLabel lblNombre;
+	private JTextField txNombre;
+	private JLabel lblApellidos;
+	private JTextField txApellidos;
+	private JLabel lblDni;
+	private JTextField txDni;
+	private JButton btnGenerarReserva;
+	private JButton btnAtras_1;
+	private JButton btnGuardarReservsa;
+	private JPanel pnListaResumenReserva;
+	private JTextArea textAreaReserva;
+	private JScrollPane scrollPane_9;
 
 	/**
 	 * Launch the application.
@@ -191,6 +209,7 @@ public class VentanaPrincipal extends JFrame {
 		contentPane.setLayout(new CardLayout(0, 0));
 		contentPane.add(getPnParquesTematicos(), "principal");
 		contentPane.add(getPanel_1(), "relacionPaquetesAlojamientos");
+		contentPane.add(getPnDatosClienteResumen(), "pnDatosClienteResumen");
 		setLocationRelativeTo(null);
 		cargaAyuda();
 	}
@@ -1025,6 +1044,7 @@ public class VentanaPrincipal extends JFrame {
 			btnSiguiente = new JButton("Siguiente");
 			btnSiguiente.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					((CardLayout) contentPane.getLayout()).show(contentPane, "pnDatosClienteResumen");
 				}
 			});
 			btnSiguiente.setMnemonic('S');
@@ -1719,5 +1739,230 @@ public class VentanaPrincipal extends JFrame {
 			tbEntradasReserva.getTableHeader().setReorderingAllowed(false);
 		}
 		return tbEntradasReserva;
+	}
+
+	private JPanel getPnDatosClienteResumen() {
+		if (pnDatosClienteResumen == null) {
+			pnDatosClienteResumen = new JPanel();
+			pnDatosClienteResumen.setLayout(new BorderLayout(0, 0));
+			pnDatosClienteResumen.add(getPnDatosCliente(), BorderLayout.NORTH);
+			pnDatosClienteResumen.add(getPnBotones1(), BorderLayout.SOUTH);
+			pnDatosClienteResumen.add(getPnListaResumenReserva(), BorderLayout.CENTER);
+		}
+		return pnDatosClienteResumen;
+	}
+
+	private JPanel getPnDatosCliente() {
+		if (pnDatosCliente == null) {
+			pnDatosCliente = new JPanel();
+			pnDatosCliente.add(getLblNombre());
+			pnDatosCliente.add(getTxNombre());
+			pnDatosCliente.add(getLblApellidos());
+			pnDatosCliente.add(getTxApellidos());
+			pnDatosCliente.add(getLblDni());
+			pnDatosCliente.add(getTxDni());
+			pnDatosCliente.add(getBtnGenerarReserva());
+		}
+		return pnDatosCliente;
+	}
+
+	private JLabel getLblNombre() {
+		if (lblNombre == null) {
+			lblNombre = new JLabel("Nombre:");
+			lblNombre.setLabelFor(getTxNombre());
+			lblNombre.setDisplayedMnemonic('N');
+			lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		}
+		return lblNombre;
+	}
+
+	private JTextField getTxNombre() {
+		if (txNombre == null) {
+			txNombre = new JTextField();
+			txNombre.setFont(new Font("Tahoma", Font.PLAIN, 14));
+			txNombre.setColumns(10);
+		}
+		return txNombre;
+	}
+
+	private JLabel getLblApellidos() {
+		if (lblApellidos == null) {
+			lblApellidos = new JLabel("Apellidos:");
+			lblApellidos.setLabelFor(getTxApellidos());
+			lblApellidos.setDisplayedMnemonic('A');
+			lblApellidos.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		}
+		return lblApellidos;
+	}
+
+	private JTextField getTxApellidos() {
+		if (txApellidos == null) {
+			txApellidos = new JTextField();
+			txApellidos.setFont(new Font("Tahoma", Font.PLAIN, 14));
+			txApellidos.setColumns(10);
+		}
+		return txApellidos;
+	}
+
+	private JLabel getLblDni() {
+		if (lblDni == null) {
+			lblDni = new JLabel("DNI:");
+			lblDni.setLabelFor(getTxDni());
+			lblDni.setDisplayedMnemonic('D');
+			lblDni.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		}
+		return lblDni;
+	}
+
+	private JTextField getTxDni() {
+		if (txDni == null) {
+			txDni = new JTextField();
+			txDni.setFont(new Font("Tahoma", Font.PLAIN, 14));
+			txDni.setColumns(10);
+		}
+		return txDni;
+	}
+
+	private JButton getBtnGenerarReserva() {
+		if (btnGenerarReserva == null) {
+			btnGenerarReserva = new JButton("Generar Recibo");
+			btnGenerarReserva.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					if (!txApellidos.getText().trim().equals("") && !txNombre.getText().trim().equals("")
+							&& !txDni.getText().trim().equals("")) {
+
+						mostrarReciboReserva();
+					} else {
+						JOptionPane.showMessageDialog(null, "EL nombre, apellidos y dni son datos obligatorios",
+								"Error", JOptionPane.ERROR_MESSAGE);
+					}
+				}
+			});
+			btnGenerarReserva.setFont(new Font("Tahoma", Font.PLAIN, 14));
+			btnGenerarReserva.setMnemonic('G');
+		}
+		return btnGenerarReserva;
+	}
+
+	/**
+	 * Metodo que muestra en pantalla el recibo generado para la reserva del
+	 * usuario.
+	 */
+	private void mostrarReciboReserva() {
+		Cliente cliente = new Cliente(txNombre.getText(), txApellidos.getText(), txDni.getText());
+		agencia.crearReserva(alojamientosReserva, paquetes, entradas, cliente, new Date(),
+				textAreaObservaciones.getText());
+
+		textAreaReserva.setText(agencia.resumenReserva());
+		textAreaReserva.setEnabled(true);
+		btnGuardarReservsa.setEnabled(true);
+	}
+
+	private JPanel getPnBotones1() {
+		if (pnBotones1 == null) {
+			pnBotones1 = new JPanel();
+			FlowLayout flowLayout = (FlowLayout) pnBotones1.getLayout();
+			flowLayout.setAlignment(FlowLayout.RIGHT);
+			pnBotones1.add(getBtnAtras_1());
+			pnBotones1.add(getBtnGuardarReservsa());
+		}
+		return pnBotones1;
+	}
+
+	private JButton getBtnAtras_1() {
+		if (btnAtras_1 == null) {
+			btnAtras_1 = new JButton("Atras");
+			btnAtras_1.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					// ((CardLayout) contentPane.getLayout()).show(contentPane,
+					// "relacionPaquetesAlojamientos");
+					// btnGuardarReservsa.setEnabled(false);
+				}
+			});
+			btnAtras_1.setMnemonic('t');
+			btnAtras_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		}
+		return btnAtras_1;
+	}
+
+	private JButton getBtnGuardarReservsa() {
+		if (btnGuardarReservsa == null) {
+			btnGuardarReservsa = new JButton("Guardar Reserva");
+			btnGuardarReservsa.setEnabled(false);
+			btnGuardarReservsa.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					// guardar la reserva
+					try {
+						agencia.guardarReserva();
+
+						JOptionPane.showMessageDialog(null, "Su reserva se ha realizado con exito", "INFORMACION",
+								JOptionPane.INFORMATION_MESSAGE);
+
+						// borrar todo el contenido de las tablas
+						modeloTablaPaquete.getDataVector().clear();
+						modeloTablaAlojamiento.getDataVector().clear();
+						modeloTablaEntradas.getDataVector().clear();
+						// modeloReserva.clear();
+
+						paquetes.clear();
+						alojamientosReserva.clear();
+						entradas.clear();
+
+						// Borrar el contenido de las observaciones y se
+						// deshabilita
+						textAreaObservaciones.setEnabled(false);
+						textAreaObservaciones.setText("");
+						lblObservaciones.setEnabled(false);
+
+						// poner los botones deshabilitados
+						btnSiguiente.setEnabled(false);
+						btnAñadir.setEnabled(false);
+
+						desHabilitarSpinner();
+
+						txNombre.setText("");
+						txApellidos.setText("");
+						txDni.setText("");
+						textAreaReserva.setEnabled(false);
+						textAreaReserva.setText("");
+
+						// cambiar al panel anterior
+						((CardLayout) contentPane.getLayout()).show(contentPane, "principal");
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+			});
+			btnGuardarReservsa.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		}
+		return btnGuardarReservsa;
+	}
+
+	private JPanel getPnListaResumenReserva() {
+		if (pnListaResumenReserva == null) {
+			pnListaResumenReserva = new JPanel();
+			pnListaResumenReserva.setLayout(new BorderLayout(0, 0));
+			pnListaResumenReserva.add(getScrollPane_9(), BorderLayout.CENTER);
+		}
+		return pnListaResumenReserva;
+	}
+
+	private JScrollPane getScrollPane_9() {
+		if (scrollPane_9 == null) {
+			scrollPane_9 = new JScrollPane();
+			scrollPane_9.setViewportView(getTextAreaReserva());
+		}
+		return scrollPane_9;
+	}
+
+	private JTextArea getTextAreaReserva() {
+		if (textAreaReserva == null) {
+			textAreaReserva = new JTextArea();
+			textAreaReserva.setFont(new Font("Monospaced", Font.PLAIN, 14));
+			textAreaReserva.setEnabled(false);
+			textAreaReserva.setEditable(false);
+		}
+		return textAreaReserva;
 	}
 }
