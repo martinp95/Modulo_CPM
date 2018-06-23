@@ -1056,7 +1056,7 @@ public class VentanaPrincipal extends JFrame {
 					((CardLayout) contentPane.getLayout()).show(contentPane, "pnDatosClienteResumen");
 				}
 			});
-			btnSiguiente.setMnemonic('S');
+			btnSiguiente.setMnemonic('G');
 			btnSiguiente.setFont(new Font("Tahoma", Font.PLAIN, 14));
 			btnSiguiente.setEnabled(false);
 		}
@@ -1538,10 +1538,14 @@ public class VentanaPrincipal extends JFrame {
 			tabbedPaneProductosAnadidos.addTab("Paquetes", null, getScrollPane_5(), null);
 			tabbedPaneProductosAnadidos.addTab("Alojamientos", null, getScrollPane_7(), null);
 			tabbedPaneProductosAnadidos.addTab("Entradas", null, getScrollPane_8(), null);
+			tabbedPaneProductosAnadidos.setMnemonicAt(0, 'Q');
+			tabbedPaneProductosAnadidos.setMnemonicAt(1, 'M');
+			tabbedPaneProductosAnadidos.setMnemonicAt(2, 'S');
 			tabbedPaneProductosAnadidos.setEnabledAt(0, false);
 			tabbedPaneProductosAnadidos.setEnabledAt(1, false);
 			tabbedPaneProductosAnadidos.setEnabledAt(2, false);
 			tabbedPaneProductosAnadidos.setSelectedIndex(-1);
+			
 		}
 		return tabbedPaneProductosAnadidos;
 	}
