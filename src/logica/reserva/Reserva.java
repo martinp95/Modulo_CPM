@@ -111,7 +111,7 @@ public class Reserva {
 					+ (alojamientoReserva.getFechaInicio().getYear() + 1900) + " / Número noches: "
 					+ alojamientoReserva.getNumeroNoches() + " / Desayuno: " + desayuno + "\nN. Personas:"
 					+ alojamientoReserva.getNumeroPersonas() + "\n\n";
-			totalAlojamientos = alojamientoReserva.getPrecioTotal();
+			totalAlojamientos += alojamientoReserva.getPrecioTotal();
 			descuentoAlojamientos += alojamientoReserva.getDescuento();
 		}
 
@@ -125,6 +125,8 @@ public class Reserva {
 			totalEntradas += entrada.getPrecioTotal();
 			descuentoEntradas += entrada.getDescuento();
 		}
+		
+		resumen+="** Observaciones **\n" + observaciones+"\n\n";
 
 		resumen += "**** PAGADO RESERVA ****\nPaquetes temáticos:\t\t\t\t" + totalPaquetes + "€"
 				+ "\nAlojamientos:\t\t\t\t\t" + totalAlojamientos + "€" + "\nEntradas:\t\t\t\t\t" + totalEntradas + "€"

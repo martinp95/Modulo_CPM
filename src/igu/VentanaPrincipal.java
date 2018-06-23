@@ -1092,6 +1092,8 @@ public class VentanaPrincipal extends JFrame {
 					btnSeleccionar.setEnabled(false);
 					textAreaDescripcionParque.setText("");
 					textAreaDescripcionParque.setEnabled(false);
+					
+					comboBoxFiltroPais.setSelectedIndex(0);
 
 					((CardLayout) contentPane.getLayout()).show(contentPane, "principal");
 				}
@@ -1960,6 +1962,8 @@ public class VentanaPrincipal extends JFrame {
 						btnSeleccionar.setEnabled(false);
 						textAreaDescripcionParque.setText("");
 						textAreaDescripcionParque.setEnabled(false);
+						
+						comboBoxFiltroPais.setSelectedIndex(0);
 
 						((CardLayout) contentPane.getLayout()).show(contentPane, "principal");
 
@@ -2077,6 +2081,8 @@ public class VentanaPrincipal extends JFrame {
 					btnSeleccionar.setEnabled(false);
 					textAreaDescripcionParque.setText("");
 					textAreaDescripcionParque.setEnabled(false);
+					
+					comboBoxFiltroPais.setSelectedIndex(0);
 
 					((CardLayout) contentPane.getLayout()).show(contentPane, "principal");
 				}
