@@ -386,6 +386,7 @@ public class VentanaPrincipal extends JFrame {
 			modeloTabla = new ModeloNoEditable(nombreColumnas, 0);
 			cargarTabla();
 			tbParquesTematicos = new JTable(modeloTabla);
+			tbParquesTematicos.setToolTipText("Seleccione un parque de atracciones para continuar.");
 			tbParquesTematicos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			tbParquesTematicos.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			tbParquesTematicos.setMinimumSize(new Dimension(0, 0));
@@ -732,6 +733,7 @@ public class VentanaPrincipal extends JFrame {
 	private JTabbedPane getTabbedPane() {
 		if (tabbedPane == null) {
 			tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+			tabbedPane.setToolTipText("");
 			tabbedPane.setFont(new Font("Tahoma", Font.PLAIN, 14));
 			tabbedPane.addChangeListener(new ChangeListener() {
 				public void stateChanged(ChangeEvent arg0) {
@@ -794,6 +796,7 @@ public class VentanaPrincipal extends JFrame {
 					"Precio Adulto/Niño" };
 			modeloTablaPaquete = new ModeloNoEditable(nombreColumnas, 0);
 			tbPaquetes = new JTable();
+			tbPaquetes.setToolTipText("Seleccione alguna de nuestra relacion de paquetes para reservar.");
 			tbPaquetes.setFont(new Font("Tahoma", Font.PLAIN, 14));
 			tbPaquetes.addMouseListener(new MouseAdapter() {
 				@Override
@@ -851,6 +854,7 @@ public class VentanaPrincipal extends JFrame {
 			String[] nombreColumnas = { "Tipo", "Estrellas", "Denominación", "Nº Plazas", "Precio" };
 			modeloTablaAlojamiento = new ModeloNoEditable(nombreColumnas, 0);
 			tbAlojamiento = new JTable();
+			tbAlojamiento.setToolTipText("Seleccione alguna de nuestra relacion de alojamientos para reservar.");
 			tbAlojamiento.setFont(new Font("Tahoma", Font.PLAIN, 14));
 			tbAlojamiento.addMouseListener(new MouseAdapter() {
 				@Override
@@ -920,6 +924,7 @@ public class VentanaPrincipal extends JFrame {
 			String[] nombreColumnas = { "Precio Adulto", "Precio Niño" };
 			modeloTablaEntradas = new ModeloNoEditable(nombreColumnas, 0);
 			tbEntradas = new JTable();
+			tbEntradas.setToolTipText("Seleccione alguna de nuestra relacion de entradas para reservar.");
 			tbEntradas.setFont(new Font("Tahoma", Font.PLAIN, 14));
 			tbEntradas.addMouseListener(new MouseAdapter() {
 				@Override
@@ -954,7 +959,7 @@ public class VentanaPrincipal extends JFrame {
 	private JLabel getLbImagenAlojamiento() {
 		if (lbImagenAlojamiento == null) {
 			lbImagenAlojamiento = new JLabel("");
-			lbImagenAlojamiento.setPreferredSize(new Dimension(300, 0));
+			lbImagenAlojamiento.setPreferredSize(new Dimension(200, 0));
 			lbImagenAlojamiento.addComponentListener(new ComponentAdapter() {
 				@Override
 				public void componentResized(ComponentEvent e) {
@@ -1021,6 +1026,7 @@ public class VentanaPrincipal extends JFrame {
 	private JButton getBtnAtras() {
 		if (btnAtras == null) {
 			btnAtras = new JButton("Atras");
+			btnAtras.setToolTipText("Vuelva a nuestra seleccion de parques tematicos para añadir mas a su reserva.");
 			btnAtras.setMnemonic('T');
 			btnAtras.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
@@ -1726,6 +1732,7 @@ public class VentanaPrincipal extends JFrame {
 					"Precio" };
 			modeloTablaPaqueteReserva = new ModeloNoEditable(nombreColumnas, 0);
 			tbPaquetesReserva = new JTable();
+			tbPaquetesReserva.setToolTipText("Selccione el elemento que desea eliminar.");
 			tbPaquetesReserva.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent arg0) {
@@ -1746,6 +1753,7 @@ public class VentanaPrincipal extends JFrame {
 					"Precio" };
 			modeloTablaAlojamientoReserva = new ModeloNoEditable(nombreColumnas, 0);
 			tbAlojamientosReserva = new JTable();
+			tbAlojamientosReserva.setToolTipText("Selccione el elemento que desea eliminar.");
 			tbAlojamientosReserva.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent arg0) {
@@ -1765,6 +1773,7 @@ public class VentanaPrincipal extends JFrame {
 			String[] nombreColumnas = { "Nº Adultos", "Nº Niños", "Fecha", "Precio" };
 			modeloTablaEntradasReserva = new ModeloNoEditable(nombreColumnas, 0);
 			tbEntradasReserva = new JTable();
+			tbEntradasReserva.setToolTipText("Selccione el elemento que desea eliminar.");
 			tbEntradasReserva.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent arg0) {
@@ -1911,6 +1920,7 @@ public class VentanaPrincipal extends JFrame {
 	private JButton getBtnAtras_1() {
 		if (btnAtras_1 == null) {
 			btnAtras_1 = new JButton("Atras");
+			btnAtras_1.setToolTipText("Vuelve a ver la relacion de paquetes o alojamientos por si quiere realizar cambios.");
 			btnAtras_1.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					((CardLayout) contentPane.getLayout()).show(contentPane, "relacionPaquetesAlojamientos");

@@ -125,13 +125,15 @@ public class Reserva {
 			totalEntradas += entrada.getPrecioTotal();
 			descuentoEntradas += entrada.getDescuento();
 		}
-		
-		resumen+="** Observaciones **\n" + observaciones+"\n\n";
+
+		resumen += "** Observaciones **\n" + observaciones + "\n\n";
 
 		resumen += "**** PAGADO RESERVA ****\nPaquetes temáticos:\t\t\t\t" + totalPaquetes + "€"
 				+ "\nAlojamientos:\t\t\t\t\t" + totalAlojamientos + "€" + "\nEntradas:\t\t\t\t\t" + totalEntradas + "€"
 				+ "\nDescuentos Oferta:\t\t\t\t" + (descuentoAlojamientos + descuentoEntradas + descuentoPaquetes) + "€"
-				+ "\n\nImporte Total:\t\t\t\t\t" + (totalPaquetes + totalAlojamientos + totalEntradas) + "€";
+				+ "\n\nImporte Total:\t\t\t\t\t" + (totalPaquetes + totalAlojamientos + totalEntradas
+						- (descuentoAlojamientos + descuentoEntradas + descuentoPaquetes))
+				+ "€";
 
 		return resumen.toUpperCase();
 	}
