@@ -4,8 +4,8 @@
          "http://java.sun.com/products/javahelp/index_1_0.dtd">
 <index version="1.0">
 		<indexitem text="introducción a Parques tematicos EII" target="introduccion" />
-		<indexitem text="relacion paquetes" target="relacion paquetes" />
-		<indexitem text="relacion alojamientos" target="relacion alojamientos" />	
+		<indexitem text="relacion alojamientos" target="relacion alojamientos" />
 		<indexitem text="relacion entradas" target="relacion entradas" />
+		<indexitem text="relacion paquetes" target="relacion paquetes" />		
 		<indexitem text="reserva" target="reserva" />		
 </index>

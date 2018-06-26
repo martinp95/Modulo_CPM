@@ -28,5 +28,14 @@
     <type>javax.help.IndexView</type>
     <data>Indice.xml</data>
   </view>
+  
+  <view>
+		<name>Buscar</name>
+		<label>Buscar</label>
+		<type>javax.help.SearchView</type>
+		<data engine="com.sun.java.help.search.DefaultSearchEngine">
+			JavaHelpSearch
+		</data>
+	</view>
 
 </helpset>

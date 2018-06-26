@@ -228,15 +228,14 @@ public class VentanaPrincipal extends JFrame {
 			File fichero = new File("help/Ayuda.hs");
 			hsURL = fichero.toURI().toURL();
 			hs = new HelpSet(null, hsURL);
-		}
-
-		catch (Exception e) {
+		} catch (Exception e) {
 			System.out.println("Ayuda no encontrada");
 			return;
 		}
 
 		HelpBroker hb = hs.createHelpBroker();
-
+		hb.initPresentation();
+				
 		hb.enableHelpKey(getRootPane(), "introduccion", hs);
 		hb.enableHelpOnButton(mntmAyuda, "introduccion", hs);
 	}
@@ -1099,7 +1098,7 @@ public class VentanaPrincipal extends JFrame {
 					btnSeleccionar.setEnabled(false);
 					textAreaDescripcionParque.setText("");
 					textAreaDescripcionParque.setEnabled(false);
-					
+
 					comboBoxFiltroPais.setSelectedIndex(0);
 
 					((CardLayout) contentPane.getLayout()).show(contentPane, "principal");
@@ -1554,7 +1553,7 @@ public class VentanaPrincipal extends JFrame {
 			tabbedPaneProductosAnadidos.setEnabledAt(1, false);
 			tabbedPaneProductosAnadidos.setEnabledAt(2, false);
 			tabbedPaneProductosAnadidos.setSelectedIndex(-1);
-			
+
 		}
 		return tabbedPaneProductosAnadidos;
 	}
@@ -1921,7 +1920,8 @@ public class VentanaPrincipal extends JFrame {
 	private JButton getBtnAtras_1() {
 		if (btnAtras_1 == null) {
 			btnAtras_1 = new JButton("Atras");
-			btnAtras_1.setToolTipText("Vuelve a ver la relacion de paquetes o alojamientos por si quiere realizar cambios.");
+			btnAtras_1.setToolTipText(
+					"Vuelve a ver la relacion de paquetes o alojamientos por si quiere realizar cambios.");
 			btnAtras_1.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					((CardLayout) contentPane.getLayout()).show(contentPane, "relacionPaquetesAlojamientos");
@@ -1973,7 +1973,7 @@ public class VentanaPrincipal extends JFrame {
 						btnSeleccionar.setEnabled(false);
 						textAreaDescripcionParque.setText("");
 						textAreaDescripcionParque.setEnabled(false);
-						
+
 						comboBoxFiltroPais.setSelectedIndex(0);
 
 						((CardLayout) contentPane.getLayout()).show(contentPane, "principal");
@@ -2092,7 +2092,7 @@ public class VentanaPrincipal extends JFrame {
 					btnSeleccionar.setEnabled(false);
 					textAreaDescripcionParque.setText("");
 					textAreaDescripcionParque.setEnabled(false);
-					
+
 					comboBoxFiltroPais.setSelectedIndex(0);
 
 					((CardLayout) contentPane.getLayout()).show(contentPane, "principal");
