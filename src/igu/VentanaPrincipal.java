@@ -197,6 +197,7 @@ public class VentanaPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public VentanaPrincipal() {
+		setMinimumSize(new Dimension(1400, 500));
 		agencia = new Agencia();
 		setIconImage(Toolkit.getDefaultToolkit()
 				.getImage(VentanaPrincipal.class.getResource("/img/parque-de-atracciones-de-agua_23-2147517736.png")));
