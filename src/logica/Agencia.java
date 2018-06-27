@@ -47,7 +47,7 @@ public class Agencia {
 				linea = fichero.readLine();
 				String[] trozos = linea.split("@");
 				relacionAlojamientos.add(new Alojamiento(trozos[0], trozos[1], Integer.parseInt(trozos[2]), trozos[3],
-						trozos[4], Integer.parseInt(trozos[5]), Double.parseDouble(trozos[6])));
+						trozos[4],trozos[5].equals("C"), Integer.parseInt(trozos[6]), Double.parseDouble(trozos[7])));
 			}
 			fichero.close();
 		} catch (FileNotFoundException fnfe) {

@@ -601,15 +601,20 @@ public class VentanaPrincipal extends JFrame {
 	 * Metodo encargado de rellenar la tabla de alojamientos.
 	 */
 	private void cargarAlojamientos() {
-		Object[] nuevaFila = new Object[5];
+		Object[] nuevaFila = new Object[6];
 		List<Alojamiento> alojamientos = agencia.getRelacionAlojamientosByParque(
 				agencia.getFiltroParquesTematicos().get(tbParquesTematicos.getSelectedRow()).getCodigo());
 		for (Alojamiento alojamiento : alojamientos) {
 			nuevaFila[0] = alojamiento.getTipo();
 			nuevaFila[1] = alojamiento.getCategoria();
 			nuevaFila[2] = alojamiento.getDenominacion();
-			nuevaFila[3] = alojamiento.getPlazas();
-			nuevaFila[4] = alojamiento.getPrecio() + "€";
+			if (alojamiento.isCompleto()) {
+				nuevaFila[3] = "Completo";
+			} else {
+				nuevaFila[3] = "Disponible";
+			}
+			nuevaFila[4] = alojamiento.getPlazas();
+			nuevaFila[5] = alojamiento.getPrecio() + "€";
 
 			modeloTablaAlojamiento.addRow(nuevaFila);
 		}
@@ -925,7 +930,7 @@ public class VentanaPrincipal extends JFrame {
 
 	private JTable getTbAlojamiento() {
 		if (tbAlojamiento == null) {
-			String[] nombreColumnas = { "Tipo", "Estrellas", "Denominación", "Nº Plazas", "Precio" };
+			String[] nombreColumnas = { "Tipo", "Estrellas", "Denominación", "Disponibilidad", "Nº Plazas", "Precio" };
 			modeloTablaAlojamiento = new ModeloNoEditable(nombreColumnas, 0);
 			tbAlojamiento = new JTable();
 			tbAlojamiento.setToolTipText("Seleccione alguna de nuestra relacion de alojamientos para reservar.");

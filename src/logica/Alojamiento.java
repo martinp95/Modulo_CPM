@@ -7,10 +7,11 @@ public class Alojamiento {
 	private int categoria;
 	private String denominacion;
 	private String codigoParque;
+	private boolean completo;
 	private int plazas;
 	private double precio;
 
-	public Alojamiento(String codigo, String tipo, int categoria, String denominacion, String codigoParque, int plazas,
+	public Alojamiento(String codigo, String tipo, int categoria, String denominacion, String codigoParque,boolean completo, int plazas,
 			double precio) {
 		super();
 		this.codigo = codigo;
@@ -18,6 +19,7 @@ public class Alojamiento {
 		this.categoria = categoria;
 		this.denominacion = denominacion;
 		this.codigoParque = codigoParque;
+		this.completo = completo;
 		this.plazas = plazas;
 		this.precio = precio;
 	}
@@ -72,6 +74,14 @@ public class Alojamiento {
 
 	public String getCodigo() {
 		return codigo;
+	}
+
+	public boolean isCompleto() {
+		return completo;
+	}
+
+	public void setCompleto(boolean completo) {
+		this.completo = completo;
 	}
 
 }
