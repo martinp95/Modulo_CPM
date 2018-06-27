@@ -454,9 +454,9 @@ public class VentanaPrincipal extends JFrame {
 			nuevaFila[4] = parque.getLocalidad();
 
 			if (parque.isCerrado()) {
-				nuevaFila[5] = "SI";
+				nuevaFila[5] = "Cerrado";
 			} else {
-				nuevaFila[5] = "NO";
+				nuevaFila[5] = "Abierto";
 			}
 
 			modeloTabla.addRow(nuevaFila);
@@ -665,7 +665,9 @@ public class VentanaPrincipal extends JFrame {
 			comboBoxFiltroPais.addItemListener(new ItemListener() {
 				public void itemStateChanged(ItemEvent evt) {
 					if (evt.getStateChange() == ItemEvent.SELECTED) {
-						filtrarPais((String) comboBoxFiltroPais.getSelectedItem());
+						// filtrarPais((String) comboBoxFiltroPais.getSelectedItem());
+						filtrar((String) comboBoxFiltroPais.getSelectedItem(),
+								(String) comboBoxFiltroEstado.getSelectedItem());
 					}
 				}
 			});
@@ -692,7 +694,8 @@ public class VentanaPrincipal extends JFrame {
 			comboBoxFiltroEstado.addItemListener(new ItemListener() {
 				public void itemStateChanged(ItemEvent evt) {
 					if (evt.getStateChange() == ItemEvent.SELECTED) {
-						
+						filtrar((String) comboBoxFiltroPais.getSelectedItem(),
+								(String) comboBoxFiltroEstado.getSelectedItem());
 					}
 				}
 			});
@@ -701,6 +704,23 @@ public class VentanaPrincipal extends JFrame {
 			comboBoxFiltroEstado.setSelectedIndex(0);
 		}
 		return comboBoxFiltroEstado;
+	}
+
+	private void filtrar(String pais, String estado) {
+		filtrarPais(pais);
+		filtrarEstadoParque(estado);
+	}
+
+	private void filtrarEstadoParque(String estado) {
+		if (!estado.equals("Todos")) {
+			for (int i = 0; i < modeloTabla.getRowCount(); i++) {
+				if (!modeloTabla.getValueAt(i, 5).equals(estado)) {
+					modeloTabla.removeRow(i);
+					agencia.eliminarElementoFiltroParquesTematicos(i);
+					i--;
+				}
+			}
+		}
 	}
 
 	/**
@@ -740,7 +760,7 @@ public class VentanaPrincipal extends JFrame {
 	private String[] rellenarEstado() {
 		String[] estado = new String[3];
 		estado[0] = "Todos";
-		estado[1] = "Abiertos";
+		estado[1] = "Abierto";
 		estado[2] = "Cerrado";
 
 		return estado;
@@ -1154,6 +1174,7 @@ public class VentanaPrincipal extends JFrame {
 					textAreaDescripcionParque.setEnabled(false);
 
 					comboBoxFiltroPais.setSelectedIndex(0);
+					comboBoxFiltroEstado.setSelectedIndex(0);
 
 					((CardLayout) contentPane.getLayout()).show(contentPane, "principal");
 				}
@@ -2148,6 +2169,7 @@ public class VentanaPrincipal extends JFrame {
 					textAreaDescripcionParque.setEnabled(false);
 
 					comboBoxFiltroPais.setSelectedIndex(0);
+					comboBoxFiltroEstado.setSelectedIndex(0);
 
 					((CardLayout) contentPane.getLayout()).show(contentPane, "principal");
 				}
