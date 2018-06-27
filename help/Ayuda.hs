@@ -6,7 +6,7 @@
 
 <helpset version="1.0">
   <!-- title -->
-  <title>Ayuda de Cruceros EII</title>
+  <title>Ayuda de Parques Tematicos EII</title>
 
   <!-- maps -->
   <maps>

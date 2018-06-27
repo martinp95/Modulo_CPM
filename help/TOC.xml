@@ -7,6 +7,7 @@
   
  	<tocitem text="Parques Tematicos EII" >
 		<tocitem text="Introducción" target="introduccion"/>
+		<tocitem text="Filtros" target="filtros"/>
 		<tocitem text="Relacion paquetes" target="relacion paquetes"/>
 		<tocitem text="Relacion alojamientos" target="relacion alojamientos"/>
 		<tocitem text="Relacion entradas" target="relacion entradas"/>

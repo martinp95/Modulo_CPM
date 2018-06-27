@@ -6,6 +6,7 @@
 <map version="1.0">
 
 <mapID target="introduccion" url="Fuentes/introduccion.html" />
+<mapID target="filtros" url="Fuentes/filtros.html" />
 <mapID target="relacion paquetes" url="Fuentes/relacionPaquetes.html" />
 <mapID target="relacion alojamientos" url="Fuentes/relacionAlojamientos.html" />
 <mapID target="relacion entradas" url="Fuentes/relacionEntradas.html" />

@@ -3,6 +3,7 @@
   PUBLIC "-//Sun Microsystems Inc.//DTD JavaHelp Index Version 1.0//EN"
          "http://java.sun.com/products/javahelp/index_1_0.dtd">
 <index version="1.0">
+		<indexitem text="Filtros de parques tematicos" target="filtros" />
 		<indexitem text="introducción a Parques tematicos EII" target="introduccion" />
 		<indexitem text="relacion alojamientos" target="relacion alojamientos" />
 		<indexitem text="relacion entradas" target="relacion entradas" />
