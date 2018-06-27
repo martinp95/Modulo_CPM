@@ -942,7 +942,16 @@ public class VentanaPrincipal extends JFrame {
 
 					mostrarImagen(codigoAlojamiento);
 
-					habilitarEleccionAlojamientos();
+					int fila = tbAlojamiento.getSelectedRow();
+
+					if (modeloTablaAlojamiento.getValueAt(fila, 3).equals("Completo")) {
+						desHabilitarSpinner();
+						JOptionPane.showMessageDialog(null,
+								"Lo sentimos pero el alojamiento esta al total de su capacidad", "Informacion",
+								JOptionPane.INFORMATION_MESSAGE);
+					} else {
+						habilitarEleccionAlojamientos();
+					}
 				}
 			});
 			tbAlojamiento.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
