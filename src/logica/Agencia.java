@@ -30,10 +30,10 @@ public class Agencia {
 
 	public Agencia() {
 		// TODO Auto-generated constructor stub
+		leerFicheroParqueTematico();
 		leerFicheroAlojamiento();
 		leerFicheroEntrada();
 		leerFicheroPaquete();
-		leerFicheroParqueTematico();
 
 		colocarOferta();
 		filtroParquesTematicos.addAll(relacionParquesTematicos);
@@ -66,12 +66,23 @@ public class Agencia {
 				String[] trozos = linea.split("@");
 				relacionEntradas.add(new Entrada(trozos[0], trozos[1], Double.parseDouble(trozos[2]),
 						Double.parseDouble(trozos[3])));
+				if (Double.parseDouble(trozos[2]) == 0.0 && Double.parseDouble(trozos[3]) == 0.0) {
+					setParqueCerradoByCodigo(trozos[1]);
+				}
 			}
 			fichero.close();
 		} catch (FileNotFoundException fnfe) {
 			JOptionPane.showMessageDialog(null, "El archivo de entradas no se ha encontrado");
 		} catch (IOException ioe) {
 			new RuntimeException("Error de entrada/salida.");
+		}
+	}
+
+	private void setParqueCerradoByCodigo(String codigo) {
+		for (ParqueTematico parqueTematico : relacionParquesTematicos) {
+			if (parqueTematico.getCodigo().equals(codigo)) {
+				parqueTematico.setCerrado(true);
+			}
 		}
 	}
 

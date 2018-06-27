@@ -8,6 +8,7 @@ public class ParqueTematico {
 	private String localidad;
 	private String descripcion;
 	private boolean oferta;
+	private boolean cerrado;
 
 	public ParqueTematico(String codigo, String denominacion, String pais, String localidad, String descripcion) {
 		super();
@@ -60,5 +61,13 @@ public class ParqueTematico {
 
 	public void ponerOferta() {
 		this.oferta = true;
+	}
+
+	public boolean isCerrado() {
+		return cerrado;
+	}
+
+	public void setCerrado(boolean cerrado) {
+		this.cerrado = cerrado;
 	}
 }

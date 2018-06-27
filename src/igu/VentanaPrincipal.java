@@ -172,6 +172,8 @@ public class VentanaPrincipal extends JFrame {
 	private JTextArea textAreaReserva;
 	private JScrollPane scrollPane_9;
 	private JButton btnCancelar_1;
+	private JLabel lblFiltroPorEstado;
+	private JComboBox<String> comboBoxFiltroEstado;
 
 	/**
 	 * Launch the application.
@@ -235,7 +237,7 @@ public class VentanaPrincipal extends JFrame {
 
 		HelpBroker hb = hs.createHelpBroker();
 		hb.initPresentation();
-				
+
 		hb.enableHelpKey(getRootPane(), "introduccion", hs);
 		hb.enableHelpOnButton(mntmAyuda, "introduccion", hs);
 	}
@@ -382,7 +384,7 @@ public class VentanaPrincipal extends JFrame {
 	private JTable getTbParquesTematicos() {
 		if (tbParquesTematicos == null) {
 			// Tabla
-			String[] nombreColumnas = { "Oferta", "Portada", "Denominación", "País", "Localidad" };
+			String[] nombreColumnas = { "Oferta", "Portada", "Denominación", "País", "Localidad", "Cerrado" };
 			modeloTabla = new ModeloNoEditable(nombreColumnas, 0);
 			cargarTabla();
 			tbParquesTematicos = new JTable(modeloTabla);
@@ -405,6 +407,7 @@ public class VentanaPrincipal extends JFrame {
 			tbParquesTematicos.getTableHeader().getColumnModel().getColumn(2).setPreferredWidth(100);
 			tbParquesTematicos.getTableHeader().getColumnModel().getColumn(3).setPreferredWidth(40);
 			tbParquesTematicos.getTableHeader().getColumnModel().getColumn(4).setPreferredWidth(40);
+			tbParquesTematicos.getTableHeader().getColumnModel().getColumn(5).setPreferredWidth(10);
 			// Columnas no intercambiables
 			tbParquesTematicos.getTableHeader().setReorderingAllowed(false);
 		}
@@ -427,7 +430,7 @@ public class VentanaPrincipal extends JFrame {
 	 * Cargar datos de la tabla que muestra la relacion de parques tematicos
 	 */
 	private void cargarTabla() {
-		Object[] nuevaFila = new Object[5];
+		Object[] nuevaFila = new Object[6];
 		agencia.eliminarFiltroParquesTematicos();
 		agencia.rellenarFiltroParquesTematicos();
 		List<ParqueTematico> relacionParquesTematicos = agencia.getFiltroParquesTematicos();
@@ -449,6 +452,12 @@ public class VentanaPrincipal extends JFrame {
 			nuevaFila[3] = parque.getPais();
 			// localidad
 			nuevaFila[4] = parque.getLocalidad();
+
+			if (parque.isCerrado()) {
+				nuevaFila[5] = "SI";
+			} else {
+				nuevaFila[5] = "NO";
+			}
 
 			modeloTabla.addRow(nuevaFila);
 		}
@@ -529,12 +538,19 @@ public class VentanaPrincipal extends JFrame {
 			btnSeleccionar = new JButton("Seleccionar");
 			btnSeleccionar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
+					ParqueTematico parque = agencia.getFiltroParquesTematicos()
+							.get(tbParquesTematicos.getSelectedRow());
+					if (parque.isCerrado()) {
+						JOptionPane.showMessageDialog(null,
+								"El parque se encuentra cerrado por favor escoja otro.\nDisculpe las molestias.",
+								"Informacion", JOptionPane.INFORMATION_MESSAGE);
+					} else {
+						addModelTablas();
 
-					addModelTablas();
+						cargarTablasRelacionPaquetesAlojamientos();
 
-					cargarTablasRelacionPaquetesAlojamientos();
-
-					((CardLayout) contentPane.getLayout()).show(contentPane, "relacionPaquetesAlojamientos");
+						((CardLayout) contentPane.getLayout()).show(contentPane, "relacionPaquetesAlojamientos");
+					}
 				}
 			});
 			btnSeleccionar.setEnabled(false);
@@ -627,6 +643,8 @@ public class VentanaPrincipal extends JFrame {
 			pnFiltro = new JPanel();
 			pnFiltro.add(getLblFiltroPorPas());
 			pnFiltro.add(getComboBoxFiltroPais());
+			pnFiltro.add(getLblFiltroPorEstado());
+			pnFiltro.add(getComboBoxFiltroEstado());
 		}
 		return pnFiltro;
 	}
@@ -656,6 +674,33 @@ public class VentanaPrincipal extends JFrame {
 			comboBoxFiltroPais.setSelectedIndex(0);
 		}
 		return comboBoxFiltroPais;
+	}
+
+	private JLabel getLblFiltroPorEstado() {
+		if (lblFiltroPorEstado == null) {
+			lblFiltroPorEstado = new JLabel("Filtro por estado:");
+			lblFiltroPorEstado.setLabelFor(getComboBoxFiltroEstado());
+			lblFiltroPorEstado.setDisplayedMnemonic('T');
+			lblFiltroPorEstado.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		}
+		return lblFiltroPorEstado;
+	}
+
+	private JComboBox<String> getComboBoxFiltroEstado() {
+		if (comboBoxFiltroEstado == null) {
+			comboBoxFiltroEstado = new JComboBox<String>();
+			comboBoxFiltroEstado.addItemListener(new ItemListener() {
+				public void itemStateChanged(ItemEvent evt) {
+					if (evt.getStateChange() == ItemEvent.SELECTED) {
+						
+					}
+				}
+			});
+			comboBoxFiltroEstado.setFont(new Font("Tahoma", Font.PLAIN, 14));
+			comboBoxFiltroEstado.setModel((new DefaultComboBoxModel<String>(rellenarEstado())));
+			comboBoxFiltroEstado.setSelectedIndex(0);
+		}
+		return comboBoxFiltroEstado;
 	}
 
 	/**
@@ -690,6 +735,15 @@ public class VentanaPrincipal extends JFrame {
 		for (int i = a; i >= 0; i--) {
 			modeloTabla.removeRow(i);
 		}
+	}
+
+	private String[] rellenarEstado() {
+		String[] estado = new String[3];
+		estado[0] = "Todos";
+		estado[1] = "Abiertos";
+		estado[2] = "Cerrado";
+
+		return estado;
 	}
 
 	/**
@@ -2102,4 +2156,5 @@ public class VentanaPrincipal extends JFrame {
 		}
 		return btnCancelar_1;
 	}
+
 }
